@@ -1,12 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
-  QueryDocumentSnapshot,
+  getDocs,  
   DocumentData,
   query,
-  where,
-  limit,
 } from "firebase/firestore";
 import { db } from "@config/firebase";
 
