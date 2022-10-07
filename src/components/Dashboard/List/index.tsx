@@ -139,10 +139,7 @@ const List = () => {
                 <a className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
                   <span className="flex items-center space-x-3 truncate">
                     <span className="truncate text-sm font-medium leading-6">
-                      {project?.name}{" "}
-                      <span className="truncate font-normal text-gray-500">
-                        in {project?.name}
-                      </span>
+                      {project?.name.toUpperCase()}{" "}
                     </span>
                   </span>
 
@@ -195,7 +192,7 @@ const List = () => {
                   <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
                     <div className="flex items-center space-x-3 lg:pl-2">
                       <a href="#" className="truncate hover:text-gray-600">
-                        <span>{project?.name}</span>
+                        <span>{project?.name.toUpperCase()}</span>
                       </a>
                     </div>
                   </td>
@@ -209,8 +206,9 @@ const List = () => {
                       <span>{project?.profession}</span>
                     </div>
                   </td>
+
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                    <Link href="/donate">
+                    <Link href={`/people/${project?.email}`}>
                       <a className="text-indigo-600 hover:text-indigo-900">
                         VER
                       </a>

@@ -4,36 +4,23 @@ import { useAuth } from "@context/AuthContext";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3CenterLeftIcon,
-  ClockIcon,
   HomeIcon,
   XMarkIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
-
 import { LayoutProps } from "./types";
 import * as styles from "./styles";
 import Head from "next/head";
 
 const navigation = [
-  { name: "Home", href: "/", icon: HomeIcon, current: true },
+  { name: "Inicio", href: "/", icon: HomeIcon, current: true },
   {
-    name: "Directorio de Fundaciones",
-    href: "directory",
+    name: "Módulos",
+    href: "modulos",
     icon: MagnifyingGlassIcon,
     current: false,
   },
-  {
-    name: "Mis Donaciones",
-    href: "mydonations",
-    icon: ClockIcon,
-    current: false,
-  },
-];
-const teams = [
-  { name: "Niños (3)", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Comedor Infantil (2)", href: "#", bgColorClass: "bg-green-500" },
-  { name: "Protección Animal (5)", href: "#", bgColorClass: "bg-yellow-500" },
 ];
 
 function classNames(...classes: any) {
@@ -55,7 +42,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>webdevpath</title>
+        <title>Mentorship</title>
       </Head>
       <div className={styles.mainDiv}>
         <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -110,13 +97,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className={styles.logoDiv}>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=500"
-                      alt="Your Company"
-                    />
-                  </div>
+
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="px-2">
                       <div className="space-y-1">
@@ -145,36 +126,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                           </a>
                         ))}
                       </div>
-                      <div className="mt-8">
-                        <h3
-                          className="px-3 text-sm font-medium text-gray-500"
-                          id="mobile-teams-headline"
-                        >
-                          Categorías
-                        </h3>
-                        <div
-                          className="mt-1 space-y-1"
-                          role="group"
-                          aria-labelledby="mobile-teams-headline"
-                        >
-                          {teams.map((team) => (
-                            <a
-                              key={team.name}
-                              href={team.href}
-                              className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                            >
-                              <span
-                                className={classNames(
-                                  team.bgColorClass,
-                                  "w-2.5 h-2.5 mr-4 rounded-full"
-                                )}
-                                aria-hidden="true"
-                              />
-                              <span className="truncate">{team.name}</span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
                     </nav>
                   </div>
                 </Dialog.Panel>
@@ -188,13 +139,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
 
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4">
-          <div className="flex flex-shrink-0 items-center px-6">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=500"
-              alt="Your Company"
-            />
-          </div>
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
             {/* User account dropdown */}
@@ -203,11 +147,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                 <Menu.Button className="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-100">
                   <span className="flex w-full items-center justify-between">
                     <span className="flex min-w-0 items-center justify-between space-x-3">
-                      <img
-                        className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                        alt=""
-                      />
                       <span className="flex min-w-0 flex-1 flex-col">
                         <span className="truncate text-sm font-medium text-gray-900">
                           Víctor Meza
@@ -246,73 +185,12 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                             "block px-4 py-2 text-sm"
                           )}
                         >
-                          View profile
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Settings
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Notifications
+                          Mi Perfil
                         </a>
                       )}
                     </Menu.Item>
                   </div>
-                  <div className="py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Get desktop app
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          Support
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
+
                   <div className="py-1">
                     <Menu.Item>
                       {({ active }) => (
@@ -362,37 +240,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                   </a>
                 ))}
               </div>
-              <div className="mt-8">
-                {/* Secondary navigation */}
-                <h3
-                  className="px-3 text-sm font-medium text-gray-500"
-                  id="desktop-teams-headline"
-                >
-                  Categorías
-                </h3>
-                <div
-                  className="mt-1 space-y-1"
-                  role="group"
-                  aria-labelledby="desktop-teams-headline"
-                >
-                  {teams.map((team) => (
-                    <a
-                      key={team.name}
-                      href={team.href}
-                      className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                    >
-                      <span
-                        className={classNames(
-                          team.bgColorClass,
-                          "w-2.5 h-2.5 mr-4 rounded-full"
-                        )}
-                        aria-hidden="true"
-                      />
-                      <span className="truncate">{team.name}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
             </nav>
           </div>
         </div>
@@ -415,11 +262,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                   <div>
                     <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -444,73 +286,12 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
                                 "block px-4 py-2 text-sm"
                               )}
                             >
-                              View profile
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-700",
-                                "block px-4 py-2 text-sm"
-                              )}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-700",
-                                "block px-4 py-2 text-sm"
-                              )}
-                            >
-                              Notifications
+                              Mi Perfil
                             </a>
                           )}
                         </Menu.Item>
                       </div>
-                      <div className="py-1">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-700",
-                                "block px-4 py-2 text-sm"
-                              )}
-                            >
-                              Get desktop app
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-700",
-                                "block px-4 py-2 text-sm"
-                              )}
-                            >
-                              Support
-                            </a>
-                          )}
-                        </Menu.Item>
-                      </div>
+                      <div className="py-1"></div>
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
