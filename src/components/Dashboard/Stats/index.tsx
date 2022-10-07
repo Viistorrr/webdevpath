@@ -1,96 +1,32 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import {
-  HomeIcon,
-  UserGroupIcon,
-  HeartIcon,
-} from "@heroicons/react/24/outline";
-
-//stats
-const stats = [
-  {
-    name: "Niños",
-    icon: UserGroupIcon,
-    stat: "250",
-    previousStat: "3000",
-    change: "8.3%",
-    changeType: "increase",
-  },
-  {
-    name: "Perros y Gatos",
-    icon: HeartIcon,
-    stat: "28",
-    previousStat: "250",
-    change: "11.2%",
-    changeType: "increase",
-  },
-  {
-    name: "Fundaciones",
-    icon: HomeIcon,
-    stat: "3",
-    previousStat: "10",
-    change: "3",
-    changeType: "increase",
-  },
-];
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
+import { UserGroupIcon } from "@heroicons/react/24/outline";
+import { useMentorshipContext } from "@context/MentorshipContext";
 
 const MainStats = () => {
+  const { totalMembers } = useMentorshipContext();
   return (
     <div>
-      <h3 className="text-lg font-medium leading-6 text-gray-900">
-        Your goals
-      </h3>
-      <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
-        {stats.map((item) => (
-          <div key={item.name} className="px-4 py-5 sm:p-6">
-            <dt className="text-base font-normal text-gray-900">
-              {item.name}
-              <item.icon className="h-6 w-6" aria-hidden="true" />
-            </dt>
-
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                {item.stat}
-                <span className="ml-2 text-xl font-medium text-gray-500">
-                  de {item.previousStat}
-                </span>
-              </div>
-
-              <div
-                className={classNames(
-                  item.changeType === "increase"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800",
-                  "inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0"
-                )}
-              >
-                {item.changeType === "increase" ? (
-                  <ArrowUpIcon
-                    className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <ArrowDownIcon
-                    className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
-                    aria-hidden="true"
-                  />
-                )}
-
-                <span className="sr-only">
-                  {" "}
-                  {item.changeType === "increase"
-                    ? "Increased"
-                    : "Decreased"}{" "}
-                  by{" "}
-                </span>
-                {item.change}
-              </div>
-            </dd>
-          </div>
-        ))}
+      <dl className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div
+          key="mentoringMembers"
+          className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6"
+        >
+          <dt>
+            <div className="absolute rounded-md bg-indigo-500 p-3">
+              <UserGroupIcon
+                className="h-8 w-8 text-white"
+                aria-hidden="true"
+              />
+            </div>
+            <p className="ml-16 truncate text-sm font-medium text-gray-500">
+              Mentoring
+            </p>
+          </dt>
+          <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
+            <p className="text-2xl font-semibold text-gray-900">
+              {totalMembers}
+            </p>
+          </dd>
+        </div>
       </dl>
     </div>
   );

@@ -10,7 +10,11 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "@config/firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {
+  MentorshipContextProvider,
+  useMentorshipContext,
+} from "@context/MentorshipContext";
 
 const projects = [
   {
@@ -92,35 +96,7 @@ function classNames(...classes: any) {
 }
 
 const List = () => {
-  const q = query(collection(db, "mentorship"));
-
-  const [loading, setLoading] = useState<boolean>(true);
-  const [mentoring, setMentoring] = useState<any>([]);
-
-  useEffect(() => {
-    getMentoring();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
-  const getMentoring = async () => {
-    const querySnapshot = await getDocs(q);
-    const result: DocumentData[] = [];
-    /* const result: QueryDocumentSnapshot<DocumentData>[] = [];
-    querySnapshot.forEach((doc) => {
-      result.push(doc);
-    }); */
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      //console.log(doc.id, " => ", doc.data());
-      result.push(doc.data());
-    });
-
-    setMentoring(result);
-  };
-
-  mentoring?.map((item: any) => console.log(item));
+  const { mentoring } = useMentorshipContext();
 
   return (
     <div>

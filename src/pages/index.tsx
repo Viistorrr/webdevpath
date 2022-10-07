@@ -7,11 +7,9 @@ import Dashboard from "./Dashboard";
 const Home: NextPage = () => {
   return (
     <>
-      <ProtectedRoute>
-        <Layout pageTitle="Dashboard">
-          <Dashboard />
-        </Layout>
-      </ProtectedRoute>
+      <Layout pageTitle="Dashboard">
+        <Dashboard />
+      </Layout>
     </>
   );
 };
