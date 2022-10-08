@@ -1,99 +1,6 @@
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
-import {
-  collection,
-  getDocs,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-} from "firebase/firestore";
-import { db } from "@config/firebase";
-import { useState } from "react";
-import {
-  MentorshipContextProvider,
-  useMentorshipContext,
-} from "@context/MentorshipContext";
-
-const projects = [
-  {
-    id: 1,
-    title: "Fundación Vivan los Niños",
-    initials: "FV",
-    team: "Hogar infantil",
-    members: [
-      {
-        name: "Dries Vincent",
-        handle: "driesvincent",
-        imageUrl:
-          "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Lindsay Walton",
-        handle: "lindsaywalton",
-        imageUrl:
-          "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Courtney Henry",
-        handle: "courtneyhenry",
-        imageUrl:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Tom Cook",
-        handle: "tomcook",
-        imageUrl:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-    ],
-    totalMembers: 150,
-    lastUpdated: "March 17, 2023",
-    pinned: true,
-    bgColorClass: "bg-blue-600",
-  },
-  {
-    id: 1,
-    title: "Comuna 13",
-    initials: "C13",
-    team: "Hogar infantil",
-    members: [
-      {
-        name: "Dries Vincent",
-        handle: "driesvincent",
-        imageUrl:
-          "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Lindsay Walton",
-        handle: "lindsaywalton",
-        imageUrl:
-          "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Courtney Henry",
-        handle: "courtneyhenry",
-        imageUrl:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Tom Cook",
-        handle: "tomcook",
-        imageUrl:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-    ],
-    totalMembers: 28,
-    lastUpdated: "March 17, 2023",
-    pinned: true,
-    bgColorClass: "bg-yellow-800",
-  },
-];
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
+import { useMentorshipContext } from "@context/MentorshipContext";
 
 const List = () => {
   const { mentoring } = useMentorshipContext();
@@ -103,19 +10,19 @@ const List = () => {
       {/* Projects list (only on smallest breakpoint) */}
       <div className="mt-10 sm:hidden">
         <div className="px-4 sm:px-6">
-          <h2 className="text-sm font-medium text-gray-900">Oportunidades</h2>
+          <h2 className="text-sm font-medium text-gray-900">Nombre</h2>
         </div>
         <ul
           role="list"
           className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
         >
-          {mentoring?.map((project: any) => (
-            <li key={project?.name}>
+          {mentoring?.map((item: any) => (
+            <li key={item?.data().name}>
               <Link href="/donate">
                 <a className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
                   <span className="flex items-center space-x-3 truncate">
                     <span className="truncate text-sm font-medium leading-6">
-                      {project?.name.toUpperCase()}{" "}
+                      {item?.data().name.toUpperCase()}{" "}
                     </span>
                   </span>
 
@@ -131,7 +38,6 @@ const List = () => {
       </div>
 
       {/* Projects table (small breakpoint and up) */}
-
       <div className="mt-8 hidden sm:block">
         <div className="inline-block min-w-full border-b border-gray-200 align-middle">
           <table className="min-w-full">
@@ -163,28 +69,28 @@ const List = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 bg-white">
-              {mentoring?.map((project: any) => (
-                <tr key={project?.name}>
+              {mentoring?.map((item: any) => (
+                <tr key={item?.data().name}>
                   <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
                     <div className="flex items-center space-x-3 lg:pl-2">
                       <a href="#" className="truncate hover:text-gray-600">
-                        <span>{project?.name.toUpperCase()}</span>
+                        <span>{item?.data().name.toUpperCase()}</span>
                       </a>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
+                  <td className="px-6 py-3 text-sm text-gray-500">
                     <div className="flex items-center space-x-2">
-                      <span>{project?.email}</span>
+                      <span>{item?.data().email}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
+                  <td className="px-6 py-3 text-sm text-gray-500">
                     <div className="flex items-center space-x-2">
-                      <span>{project?.profession}</span>
+                      <span>{item?.data().profession}</span>
                     </div>
                   </td>
 
-                  <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                    <Link href={`/people/${project?.email}`}>
+                  <td className="whitespace-nowrap px-6 py-3 text-center text-sm font-medium">
+                    <Link href={`/progress/${item?.id}`}>
                       <a className="text-indigo-600 hover:text-indigo-900">
                         VER
                       </a>

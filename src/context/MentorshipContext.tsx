@@ -1,10 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  collection,
-  getDocs,  
-  DocumentData,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs, DocumentData, query } from "firebase/firestore";
 import { db } from "@config/firebase";
 
 const MentorshipContext = createContext({});
@@ -16,7 +11,7 @@ export const MentorshipContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const q = query(collection(db, "mentorship"));
+  const q = collection(db, "mentorship");
   const [loading, setLoading] = useState<boolean>(true);
   const [mentoring, setMentoring] = useState<any>([]);
   const [totalMembers, setTotalMembers] = useState<number>(0);
@@ -32,7 +27,7 @@ export const MentorshipContextProvider = ({
     const querySnapshot = await getDocs(q);
     const result: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
-      result.push(doc.data());
+      result.push(doc); //set the data to the context
     });
 
     setMentoring(result);
