@@ -4,7 +4,7 @@ import Layout from "@components/Layout";
 import { db } from "@config/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { PaperClipIcon } from "@heroicons/react/20/solid";
+/*TODO: Form to Add modules and activities by user*/
 
 const Index = (): JSX.Element => {
   const router = useRouter();

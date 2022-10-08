@@ -17,8 +17,8 @@ const List = () => {
           className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
         >
           {mentoring?.map((item: any) => (
-            <li key={item?.data().name}>
-              <Link href="/donate">
+            <li key={item?.id}>
+              <Link href={`/progress/${item?.id}`}>
                 <a className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
                   <span className="flex items-center space-x-3 truncate">
                     <span className="truncate text-sm font-medium leading-6">
