@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { collection, getDocs, DocumentData, query } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { db } from "@config/firebase";
+import { collection, getDocs, DocumentData } from "firebase/firestore";
 
 const MentorshipContext = createContext({});
 
@@ -11,6 +12,7 @@ export const MentorshipContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const router = useRouter();
   const q = collection(db, "mentorship");
   const [loading, setLoading] = useState<boolean>(true);
   const [mentoring, setMentoring] = useState<any>([]);
@@ -35,7 +37,9 @@ export const MentorshipContextProvider = ({
   };
 
   return (
-    <MentorshipContext.Provider value={{ mentoring, totalMembers }}>
+    <MentorshipContext.Provider
+      value={{ mentoring, totalMembers, loading, router }}
+    >
       {loading ? null : children}
     </MentorshipContext.Provider>
   );

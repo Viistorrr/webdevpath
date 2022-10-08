@@ -43,7 +43,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>Mentorship</title>
+        <title>vMentorship</title>
       </Head>
       <div className={styles.mainDiv}>
         <Transition.Root show={sidebarOpen} as={Fragment}>

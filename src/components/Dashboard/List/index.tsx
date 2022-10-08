@@ -4,7 +4,6 @@ import { useMentorshipContext } from "@context/MentorshipContext";
 
 const List = () => {
   const { mentoring } = useMentorshipContext();
-
   return (
     <div>
       {/* Projects list (only on smallest breakpoint) */}
@@ -25,7 +24,6 @@ const List = () => {
                       {item?.data().name.toUpperCase()}{" "}
                     </span>
                   </span>
-
                   <ChevronRightIcon
                     className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"

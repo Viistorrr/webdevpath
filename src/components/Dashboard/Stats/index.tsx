@@ -11,7 +11,7 @@ const MainStats = () => {
           className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6"
         >
           <dt>
-            <div className="absolute rounded-md bg-indigo-500 p-3">
+            <div className="absolute rounded-md bg-sky-700 p-3">
               <UserGroupIcon
                 className="h-8 w-8 text-white"
                 aria-hidden="true"
