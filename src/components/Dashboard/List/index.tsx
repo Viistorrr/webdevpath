@@ -71,9 +71,11 @@ const List = () => {
                 <tr key={item?.data().name}>
                   <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
                     <div className="flex items-center space-x-3 lg:pl-2">
-                      <a href="#" className="truncate hover:text-gray-600">
-                        <span>{item?.data().name.toUpperCase()}</span>
-                      </a>
+                      <Link href={`/progress/${item?.id}`}>
+                        <a className="truncate hover:text-gray-600">
+                          <span>{item?.data().name.toUpperCase()}</span>
+                        </a>
+                      </Link>
                     </div>
                   </td>
                   <td className="px-6 py-3 text-sm text-gray-500">
