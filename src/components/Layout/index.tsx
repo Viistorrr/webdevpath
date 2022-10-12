@@ -18,7 +18,7 @@ const navigation = [
   { name: "Inicio", href: "/", icon: HomeIcon, current: true },
   {
     name: "Módulos",
-    href: "modulos",
+    href: "modules",
     icon: MagnifyingGlassIcon,
     current: false,
   },

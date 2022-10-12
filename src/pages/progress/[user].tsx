@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import {
   doc,
   getDoc,
@@ -14,7 +15,7 @@ import Sessions from "@components/Sessions";
 
 /*TODO: Form to Add modules and activities by user*/
 
-const Index = ({ mentoring }: any): JSX.Element => {
+const Index: NextPage = ({ mentoring }: any): JSX.Element => {
   const addMentoring = async () => {
     const cityRef = doc(db, "mentorship", "documentMentor");
     setDoc(
