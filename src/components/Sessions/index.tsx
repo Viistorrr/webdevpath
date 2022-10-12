@@ -119,12 +119,12 @@ export default function Sessions() {
                           {activityItem.person.name}
                         </a>{" "}
                         assigned{" "}
-                        <a
+                        {/* <a
                           href={activityItem?.assigned.href}
                           className="font-medium text-gray-900"
                         >
                           {activityItem?.assigned.name}
-                        </a>{" "}
+                        </a>{" "} */}
                         <span className="whitespace-nowrap">
                           {activityItem.date}
                         </span>
@@ -155,7 +155,7 @@ export default function Sessions() {
                           added tags
                         </span>{" "}
                         <span className="mr-0.5">
-                          {activityItem.tags.map((tag) => (
+                          {/* {activityItem.tags.map((tag) => (
                             <Fragment key={tag.name}>
                               <a
                                 href={tag.href}
@@ -175,7 +175,7 @@ export default function Sessions() {
                                 </span>
                               </a>{" "}
                             </Fragment>
-                          ))}
+                          ))} */}
                         </span>
                         <span className="whitespace-nowrap">
                           {activityItem.date}
