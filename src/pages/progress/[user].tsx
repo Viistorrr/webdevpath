@@ -122,7 +122,7 @@ const Index: NextPage = ({ mentoring }: any): JSX.Element => {
             </div>
             <div className="flex m-8">
               <Steps mentoring={mentoring} />
-              <Sessions />
+              {/* <Sessions /> */}
             </div>
           </>
         )}

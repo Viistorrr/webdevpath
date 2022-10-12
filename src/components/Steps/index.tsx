@@ -3,6 +3,9 @@ import {
   HandThumbUpIcon,
   UserIcon,
   XMarkIcon,
+  ArrowTopRightOnSquareIcon,
+  CodeBracketIcon,
+  ClockIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 
@@ -68,10 +71,6 @@ type StepsProps = {
 };
 
 export default function Steps({ mentoring }: StepsProps) {
-  // console.log("mentoring from steps component", mentoring);
-
-  mentoring?.steps?.map((item: any) => console.log(item.link));
-
   return (
     <div className="flow-root mx-8">
       <ul role="list" className="-mb-8">
@@ -86,17 +85,24 @@ export default function Steps({ mentoring }: StepsProps) {
               ) : null}
               <div className="relative flex space-x-3">
                 <div>
-                  {item.completed ? (
+                  {item?.completed ? (
                     <span
                       className={classNames(
                         "bg-green-400",
                         "h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white"
                       )}
                     >
-                      <CheckIcon
-                        className="h-5 w-5 text-white"
-                        aria-hidden="true"
-                      />
+                      {item?.reto ? (
+                        <CodeBracketIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <CheckIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      )}
                     </span>
                   ) : (
                     <span
@@ -105,30 +111,41 @@ export default function Steps({ mentoring }: StepsProps) {
                         "h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white"
                       )}
                     >
-                      <XMarkIcon
-                        className="h-5 w-5 text-white"
-                        aria-hidden="true"
-                      />
+                      {item?.reto ? (
+                        <CodeBracketIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <ClockIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      )}
                     </span>
                   )}
                 </div>
-                <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                  <div>
-                    <p className="text-sm text-gray-500">
-                      {item.name}{" "}
-                      <Link href={item.link}>
-                        <a
-                          target="_blank"
-                          className="font-medium text-gray-900"
-                        >
-                          {item.link}
-                        </a>
-                      </Link>
-                    </p>
+                <div className="flex space-x-3 w-full">
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-medium">{item.name}</h3>
+                      <div className="w-4 h-4 mx-2">
+                        <Link href={item.link}>
+                          <a
+                            target="_blank"
+                            className="font-medium text-sky-600 hover:text-sky-500"
+                          >
+                            <ArrowTopRightOnSquareIcon />
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-500">{item.module}</p>
                   </div>
-                  <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                    <time dateTime={item.name}>- {item.module}</time>
-                  </div>
+
+                  {/* <div className="whitespace-nowrap text-right text-sm text-gray-500">
+                    <time dateTime={item.name}> - {item.module}</time>
+                  </div> */}
                 </div>
               </div>
             </div>
