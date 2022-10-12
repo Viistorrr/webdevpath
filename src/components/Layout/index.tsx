@@ -6,9 +6,12 @@ import {
   Bars3CenterLeftIcon,
   HomeIcon,
   XMarkIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import {
+  ChevronUpDownIcon,
+  RectangleGroupIcon,
+} from "@heroicons/react/20/solid";
+
 import { LayoutProps } from "./types";
 import * as styles from "./styles";
 import Head from "next/head";
@@ -19,7 +22,7 @@ const navigation = [
   {
     name: "Módulos",
     href: "/modules",
-    icon: MagnifyingGlassIcon,
+    icon: RectangleGroupIcon,
     current: false,
   },
 ];
