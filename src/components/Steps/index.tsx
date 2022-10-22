@@ -29,7 +29,7 @@ export default function Steps({ mentoring }: StepsProps) {
               ) : null}
               <div className="relative flex space-x-3">
                 <div>
-                  {item?.completed ? (
+                  {item?.completed === "si" || item?.completed === true ? (
                     <span
                       className={classNames(
                         "bg-green-400",

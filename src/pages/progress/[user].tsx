@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { NextPage } from "next";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,91 @@ import { db } from "@config/firebase";
 import Steps from "@components/Steps";
 import { useMentorshipContext } from "@context/MentorshipContext";
 
-/*TODO: Form to Add modules and activities by user*/
+const ModuleOneSteps = [
+  {
+    name: "Tecnica Pomodoro",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://protecciondatos-lopd.com/empresas/tecnica-pomodoro/",
+    completed: "no",
+  },
+  {
+    name: "Que son las Metodologías Ágiles",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://www.iebschool.com/blog/que-son-metodologias-agiles-agile-scrum/",
+    completed: "no",
+  },
+  {
+    name: "Qué es SCRUM",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://www.atlassian.com/es/agile/scrum",
+    completed: "no",
+  },
+  {
+    name: "Metodología Kanban",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://kanbanize.com/es/recursos-de-kanban/primeros-pasos/que-es-kanban",
+    completed: "no",
+  },
+  {
+    name: "Crear un Board en Trello",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://trello.com/",
+    completed: "no",
+  },
+  {
+    name: "Fijar Objetivos a corto, mediano y largo plazo",
+    module: "Gestión Efectiva del Tiempo",
+    link: "https://www.notion.so/",
+    completed: "no",
+  },
+];
+
+const html5Steps = [
+  {
+    name: "Qué es HTML5",
+    module: "HTML5",
+    link: "https://www.xataka.com/basics/que-html5-que-novedades-ofrece",
+    completed: "no",
+  },
+  {
+    name: "Etiquetas Básicas de HTML5",
+    module: "HTML5",
+    link: "https://www.iebschool.com/blog/que-es-etiqueta-html-analitica-usabilidad/",
+    completed: "no",
+  },
+  {
+    name: "Estructura Básica de una Página Web",
+    module: "HTML5",
+    link: "https://blog.hubspot.es/website/estructura-html#:~:text=La%20estructura%20HTML%20de%20una%20p%C3%A1gina%20web%20se%20compone%20de,elementos%20visibles%20de%20la%20p%C3%A1gina",
+    completed: "no",
+  },
+  {
+    name: "RETO: Crear Primera Página Web con tu información personal",
+    module: "HTML5",
+    link: "https://www.notion.so/1-HTML5-c2d6467726024f2d9ecd8c275d84da5a",
+    completed: "no",
+    reto: "si",
+  },
+];
+
+const css3Steps = [
+  {
+    name: "Qué es CSS3",
+    module: "CSS3",
+    link: "https://www.notion.so/2-CSS-2b84a1a5d670452a94892f8893b8ee0a",
+  },
+  {
+    name: "Qué es un Framework CSS",
+    module: "CSS3",
+    link: "RETO: Agregar Estilos a tu página web",
+    completed: "no",
+    reto: "si",
+  },
+];
 
 const Index: NextPage = ({ mentoring, mentoringId }: any): JSX.Element => {
   const [open, setOpen] = useState(false);
+  const userRef = doc(db, "mentorship", mentoringId);
 
   const { modules } = useMentorshipContext();
   const tempSteps: any[] = [];
@@ -20,6 +101,16 @@ const Index: NextPage = ({ mentoring, mentoringId }: any): JSX.Element => {
   });
 
   const cancelButtonRef = useRef(null);
+
+  const handleAddModuleOneSteps = () => {
+    setDoc(
+      userRef,
+      {
+        steps: ModuleOneSteps,
+      },
+      { merge: true }
+    );
+  };
 
   const AddStepModal = () => {
     const {
@@ -30,7 +121,6 @@ const Index: NextPage = ({ mentoring, mentoringId }: any): JSX.Element => {
 
     const onSubmit = (data: any) => {
       tempSteps.push(data);
-      const userRef = doc(db, "mentorship", mentoringId);
       setDoc(
         userRef,
         {
@@ -209,6 +299,15 @@ const Index: NextPage = ({ mentoring, mentoringId }: any): JSX.Element => {
                     className="inline-flex items-center rounded-md border border-sky-700 bg-sky-100 px-6 py-3 text-base font-medium text-sky-700 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
                   >
                     Agregar Step
+                  </button>
+                </div>
+                <div className="flex px-4 py-5 sm:px-6 gap-6">
+                  <button
+                    onClick={() => handleAddModuleOneSteps()}
+                    type="button"
+                    className="inline-flex items-center rounded-md border border-sky-700 bg-sky-100 px-6 py-3 text-base font-medium text-sky-700 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+                  >
+                    Add ModuleOneSteps
                   </button>
                 </div>
               </div>
