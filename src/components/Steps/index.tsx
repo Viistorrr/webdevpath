@@ -1,66 +1,10 @@
 import {
   CheckIcon,
-  HandThumbUpIcon,
-  UserIcon,
-  XMarkIcon,
   ArrowTopRightOnSquareIcon,
   CodeBracketIcon,
   ClockIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
-
-const timeline = [
-  {
-    id: 1,
-    content: "Applied to",
-    target: "Front End Developer",
-    href: "#",
-    date: "Sep 20",
-    datetime: "2020-09-20",
-    icon: UserIcon,
-    iconBackground: "bg-gray-400",
-  },
-  {
-    id: 2,
-    content: "Advanced to phone screening by",
-    target: "Bethany Blake",
-    href: "#",
-    date: "Sep 22",
-    datetime: "2020-09-22",
-    icon: HandThumbUpIcon,
-    iconBackground: "bg-blue-500",
-  },
-  {
-    id: 3,
-    content: "Completed phone screening with",
-    target: "Martha Gardner",
-    href: "#",
-    date: "Sep 28",
-    datetime: "2020-09-28",
-    icon: CheckIcon,
-    iconBackground: "bg-green-500",
-  },
-  {
-    id: 4,
-    content: "Advanced to interview by",
-    target: "Bethany Blake",
-    href: "#",
-    date: "Sep 30",
-    datetime: "2020-09-30",
-    icon: HandThumbUpIcon,
-    iconBackground: "bg-blue-500",
-  },
-  {
-    id: 5,
-    content: "Completed interview with",
-    target: "Katherine Snyder",
-    href: "#",
-    date: "Oct 4",
-    datetime: "2020-10-04",
-    icon: CheckIcon,
-    iconBackground: "bg-green-500",
-  },
-];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -74,10 +18,10 @@ export default function Steps({ mentoring }: StepsProps) {
   return (
     <div className="flow-root mx-8">
       <ul role="list" className="-mb-8">
-        {mentoring?.steps?.map((item: any, eventIdx: any) => (
+        {mentoring?.steps?.map((item: any, eventIdx: number) => (
           <li key={item.name}>
             <div className="relative pb-8">
-              {eventIdx !== timeline.length - 1 ? (
+              {eventIdx !== mentoring.length - 1 ? (
                 <span
                   className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
                   aria-hidden="true"
